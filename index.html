@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Times &amp; Divide Flash Cards</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="bg-blob blob-a"></div>
+    <div class="bg-blob blob-b"></div>
+
+    <main class="app">
+      <header class="topbar">
+        <div class="brand">
+          <span class="logo" aria-hidden="true">×÷</span>
+          <div>
+            <h1>Flash Cards</h1>
+            <p>Multiply · Divide · Keep going</p>
+          </div>
+        </div>
+        <div class="stats" id="stats">
+          <div class="stat">
+            <span class="stat-label">Done</span>
+            <strong id="stat-total">0</strong>
+          </div>
+          <div class="stat">
+            <span class="stat-label">Correct</span>
+            <strong id="stat-correct">0</strong>
+          </div>
+          <div class="stat">
+            <span class="stat-label">Streak</span>
+            <strong id="stat-streak">0</strong>
+          </div>
+        </div>
+      </header>
+
+      <section class="controls" aria-label="Practice settings">
+        <div class="control-group">
+          <span class="control-label">Type</span>
+          <div class="pills" role="tablist">
+            <button class="pill is-on" data-mode="mix" type="button">Mix</button>
+            <button class="pill" data-mode="mul" type="button">Multiply</button>
+            <button class="pill" data-mode="div" type="button">Divide</button>
+          </div>
+        </div>
+        <div class="control-group">
+          <span class="control-label">Difficulty</span>
+          <div class="pills" role="tablist">
+            <button class="pill is-on" data-level="easy" type="button">Easy 1–5</button>
+            <button class="pill" data-level="medium" type="button">Medium 1–9</button>
+            <button class="pill" data-level="hard" type="button">Hard 1–12</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="stage">
+        <article class="card" id="card">
+          <p class="card-kicker" id="card-kicker">New</p>
+          <p class="prompt" id="prompt">3 × 4 = ?</p>
+          <p class="hint" id="hint" hidden></p>
+          <form class="answer-form" id="answer-form" autocomplete="off">
+            <label class="sr-only" for="answer">Answer</label>
+            <input
+              id="answer"
+              name="answer"
+              inputmode="numeric"
+              pattern="[0-9]*"
+              maxlength="4"
+              placeholder="?"
+              autofocus
+            />
+            <button class="submit" type="submit">Check</button>
+          </form>
+          <p class="feedback" id="feedback" aria-live="polite"></p>
+        </article>
+
+        <div class="keypad" id="keypad" aria-label="Number pad">
+          <button type="button" data-key="1">1</button>
+          <button type="button" data-key="2">2</button>
+          <button type="button" data-key="3">3</button>
+          <button type="button" data-key="4">4</button>
+          <button type="button" data-key="5">5</button>
+          <button type="button" data-key="6">6</button>
+          <button type="button" data-key="7">7</button>
+          <button type="button" data-key="8">8</button>
+          <button type="button" data-key="9">9</button>
+          <button type="button" class="ghost" data-key="clear">Clear</button>
+          <button type="button" data-key="0">0</button>
+          <button type="button" class="ghost" data-key="back">Back</button>
+        </div>
+      </section>
+
+      <footer class="foot">
+        <p>Progress is saved in this browser. Missed problems come back later with a hint.</p>
+        <button class="text-btn" id="reset-stats" type="button">Reset progress</button>
+      </footer>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
