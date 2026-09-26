@@ -101,6 +101,26 @@ h1 {
   font-size: 14px;
 }
 
+.top-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.settings-btn,
+.back-btn {
+  border: 0;
+  border-radius: 999px;
+  background: white;
+  color: var(--ink);
+  padding: 10px 16px;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+}
+
 .stats {
   display: flex;
   gap: 10px;
@@ -126,10 +146,47 @@ h1 {
   font-size: 24px;
 }
 
+.settings {
+  margin-top: 22px;
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 22px;
+  box-shadow: var(--shadow);
+}
+
+.settings h2 {
+  margin: 16px 0 0;
+  font-size: 28px;
+}
+
+.practice-setup {
+  margin: 18px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 800;
+  white-space: pre-line;
+}
+
 .controls {
   margin-top: 22px;
   display: grid;
+  gap: 18px;
+}
+
+.setting-panel {
+  display: grid;
   gap: 14px;
+  padding-top: 16px;
+  border-top: 1px solid #e7edf7;
+}
+
+.setting-panel h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.setting-panel.is-active h3 {
+  color: var(--accent-2);
 }
 
 .control-label {
@@ -137,6 +194,12 @@ h1 {
   font-size: 13px;
   color: var(--muted);
   margin-bottom: 8px;
+}
+
+.control-note {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 14px;
 }
 
 .pills {
@@ -205,22 +268,53 @@ h1 {
   font-size: 13px;
 }
 
+.timer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+#timer {
+  min-width: 2ch;
+  font-family: Fredoka, sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--accent-2);
+}
+
+#timer.is-low {
+  color: var(--bad);
+}
+
+.timer-track {
+  width: 160px;
+  height: 12px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #e7edf7;
+}
+
+.timer-fill {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--accent-2);
+  transform: scaleX(1);
+  transform-origin: left center;
+}
+
+.timer-fill.is-low {
+  background: var(--bad);
+}
+
 .prompt {
   margin: 0;
   font-family: Fredoka, sans-serif;
   font-size: clamp(40px, 10vw, 72px);
   font-weight: 700;
   line-height: 1.1;
-}
-
-.hint {
-  margin: 12px auto 0;
-  max-width: 28em;
-  background: #fff4d6;
-  color: #6a4b12;
-  padding: 10px 14px;
-  border-radius: 14px;
-  font-size: 15px;
 }
 
 .answer-form {
@@ -299,8 +393,13 @@ h1 {
 
 .keypad .ghost {
   font-size: 16px;
-    font-family: Nunito, sans-serif;
+  font-family: Nunito, sans-serif;
   color: var(--muted);
+}
+
+.keypad .wide {
+  grid-column: 1 / -1;
+  height: 46px;
 }
 
 .foot {
@@ -308,6 +407,13 @@ h1 {
   text-align: center;
   color: var(--muted);
   font-size: 14px;
+}
+
+.foot-actions {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  flex-wrap: wrap;
 }
 
 .text-btn {
@@ -318,6 +424,104 @@ h1 {
   text-decoration: underline;
   cursor: pointer;
   font: inherit;
+}
+
+.misses {
+  width: min(560px, calc(100vw - 24px));
+  max-height: min(80vh, 720px);
+  margin: auto;
+  padding: 0;
+  border: 0;
+  border-radius: 24px;
+  color: var(--ink);
+  box-shadow: var(--shadow);
+}
+
+.misses::backdrop {
+  background: rgba(28, 39, 64, 0.45);
+}
+
+.misses-head {
+  position: sticky;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 18px 12px;
+  background: white;
+}
+
+.misses-head h2 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.close-misses {
+  border: 0;
+  border-radius: 999px;
+  padding: 8px 14px;
+  background: #eef3fb;
+  color: var(--ink);
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.misses-empty,
+.miss-list,
+.miss-log,
+.misses-sub {
+  margin: 0;
+  padding: 0 18px;
+}
+
+.misses-empty {
+  padding-bottom: 18px;
+  color: var(--muted);
+}
+
+.miss-list,
+.miss-log {
+  list-style: none;
+  display: grid;
+  gap: 10px;
+  padding-bottom: 8px;
+}
+
+.miss-list {
+  padding-bottom: 16px;
+}
+
+.miss-item,
+.miss-try {
+  background: #fff7f4;
+  border-radius: 16px;
+  padding: 12px 14px;
+}
+
+.miss-eq {
+  margin: 0;
+  font-family: Fredoka, sans-serif;
+  font-size: 22px;
+}
+
+.miss-meta,
+.miss-try p {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.misses-sub {
+  margin-top: 4px;
+  padding-bottom: 8px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.miss-log {
+  padding-bottom: 18px;
 }
 
 .sr-only {

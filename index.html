@@ -25,6 +25,8 @@
             <p>Multiply · Divide · Keep going</p>
           </div>
         </div>
+        <div class="top-actions">
+        <button class="settings-btn" id="open-settings" type="button">Settings</button>
         <div class="stats" id="stats">
           <div class="stat">
             <span class="stat-label">Done</span>
@@ -39,40 +41,28 @@
             <strong id="stat-streak">0</strong>
           </div>
         </div>
+        </div>
       </header>
 
-      <section class="controls" aria-label="Practice settings">
-        <div class="control-group">
-          <span class="control-label">Type</span>
-          <div class="pills" role="tablist">
-            <button class="pill is-on" data-mode="mix" type="button">Mix</button>
-            <button class="pill" data-mode="mul" type="button">Multiply</button>
-            <button class="pill" data-mode="div" type="button">Divide</button>
-          </div>
-        </div>
-        <div class="control-group">
-          <span class="control-label">Difficulty</span>
-          <div class="pills" role="tablist">
-            <button class="pill is-on" data-level="easy" type="button">Easy 1–5</button>
-            <button class="pill" data-level="medium" type="button">Medium 1–9</button>
-            <button class="pill" data-level="hard" type="button">Hard 1–12</button>
-          </div>
-        </div>
-      </section>
-
+      <section class="practice" id="practice">
+      <p class="practice-setup" id="practice-setup">Integers · Mix · Easy 1–5</p>
       <section class="stage">
         <article class="card" id="card">
           <p class="card-kicker" id="card-kicker">New</p>
+          <div class="timer">
+            <span id="timer" aria-label="30 seconds left">30</span>
+            <span class="timer-track">
+              <span class="timer-fill" id="timer-fill"></span>
+            </span>
+          </div>
           <p class="prompt" id="prompt">3 × 4 = ?</p>
-          <p class="hint" id="hint" hidden></p>
           <form class="answer-form" id="answer-form" autocomplete="off">
             <label class="sr-only" for="answer">Answer</label>
             <input
               id="answer"
               name="answer"
-              inputmode="numeric"
-              pattern="[0-9]*"
-              maxlength="4"
+              inputmode="decimal"
+              maxlength="8"
               placeholder="?"
               autofocus
             />
@@ -91,17 +81,104 @@
           <button type="button" data-key="7">7</button>
           <button type="button" data-key="8">8</button>
           <button type="button" data-key="9">9</button>
-          <button type="button" class="ghost" data-key="clear">Clear</button>
+          <button type="button" data-key=".">.</button>
           <button type="button" data-key="0">0</button>
           <button type="button" class="ghost" data-key="back">Back</button>
+          <button type="button" class="ghost wide" data-key="clear">Clear</button>
         </div>
       </section>
 
       <footer class="foot">
-        <p>Progress is saved in this browser. Missed problems come back later with a hint.</p>
-        <button class="text-btn" id="reset-stats" type="button">Reset progress</button>
+        <p>Progress and missed problems stay saved in this browser.</p>
+        <div class="foot-actions">
+          <button class="text-btn" id="open-misses" type="button">Missed problems</button>
+          <button class="text-btn" id="reset-stats" type="button">Reset progress</button>
+        </div>
       </footer>
+      </section>
+
+      <section class="settings" id="settings" hidden>
+        <button class="back-btn" id="close-settings" type="button">Back to practice</button>
+        <h2>Settings</h2>
+        <div class="controls">
+          <div class="control-group">
+            <span class="control-label">Practice now (pick one or both)</span>
+            <div class="pills">
+              <button class="pill is-on" data-track="integers" aria-pressed="true" type="button">Integers</button>
+              <button class="pill" data-track="decimals" aria-pressed="false" type="button">Decimals</button>
+            </div>
+          </div>
+
+          <article class="setting-panel is-active" data-panel="integers">
+            <h3>Integers</h3>
+            <div class="control-group">
+              <span class="control-label">Type</span>
+              <div class="pills">
+                <button class="pill is-on" data-setting="integers" data-op="mix" type="button">Mix</button>
+                <button class="pill" data-setting="integers" data-op="mul" type="button">Multiply</button>
+                <button class="pill" data-setting="integers" data-op="div" type="button">Divide</button>
+              </div>
+            </div>
+            <div class="control-group">
+              <span class="control-label">Difficulty</span>
+              <div class="pills">
+                <button class="pill is-on" data-setting="integers" data-level="easy" type="button">Easy 1–5</button>
+                <button class="pill" data-setting="integers" data-level="medium" type="button">Medium 1–9</button>
+                <button class="pill" data-setting="integers" data-level="hard" type="button">Hard 1–12</button>
+              </div>
+            </div>
+            <div class="control-group">
+              <span class="control-label">Extra zeros</span>
+              <div class="pills">
+                <button class="pill is-on" data-setting="integers" data-zeros="0" type="button">Off</button>
+                <button class="pill" data-setting="integers" data-zeros="1" type="button">1 zero</button>
+                <button class="pill" data-setting="integers" data-zeros="2" type="button">2 zeros</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="setting-panel" data-panel="decimals">
+            <h3>Decimals</h3>
+            <p class="control-note">Times table with the decimal point moved.</p>
+            <div class="control-group">
+              <span class="control-label">Type</span>
+              <div class="pills">
+                <button class="pill is-on" data-setting="decimals" data-op="mix" type="button">Mix</button>
+                <button class="pill" data-setting="decimals" data-op="mul" type="button">Multiply</button>
+                <button class="pill" data-setting="decimals" data-op="div" type="button">Divide</button>
+              </div>
+            </div>
+            <div class="control-group">
+              <span class="control-label">Difficulty</span>
+              <div class="pills">
+                <button class="pill is-on" data-setting="decimals" data-level="easy" type="button">Easy 1–5</button>
+                <button class="pill" data-setting="decimals" data-level="medium" type="button">Medium 1–9</button>
+                <button class="pill" data-setting="decimals" data-level="hard" type="button">Hard 1–12</button>
+              </div>
+            </div>
+            <div class="control-group">
+              <span class="control-label">Extra zeros</span>
+              <div class="pills">
+                <button class="pill is-on" data-setting="decimals" data-zeros="0" type="button">Off</button>
+                <button class="pill" data-setting="decimals" data-zeros="1" type="button">1 zero</button>
+                <button class="pill" data-setting="decimals" data-zeros="2" type="button">2 zeros</button>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
     </main>
+
+    <dialog class="misses" id="misses">
+      <div class="misses-head">
+        <h2>Missed problems</h2>
+        <button class="close-misses" id="close-misses" type="button">Close</button>
+      </div>
+      <p class="misses-empty" id="misses-empty">No missed problems yet.</p>
+      <ul class="miss-list" id="miss-summary"></ul>
+      <h3 class="misses-sub" id="misses-recent-title" hidden>Recent tries</h3>
+      <ul class="miss-log" id="miss-log"></ul>
+    </dialog>
 
     <script src="app.js"></script>
   </body>
