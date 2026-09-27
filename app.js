@@ -627,7 +627,7 @@ function showProblem(problem) {
   els.feedback.className = "feedback";
   els.card.classList.remove("is-good", "is-bad");
   els.answer.value = "";
-  els.answer.focus();
+  suppressSystemKeyboard();
   startQuestionTimer();
   saveProgress();
 }
@@ -824,7 +824,7 @@ function closeSettings() {
     return;
   }
   startQuestionTimer(state.remainingMs);
-  els.answer.focus();
+  suppressSystemKeyboard();
 }
 
 els.openSettings.addEventListener("click", openSettings);
@@ -850,8 +850,19 @@ els.keypad.addEventListener("click", (event) => {
   } else if (els.answer.value.length < 8) {
     els.answer.value += key;
   }
-  els.answer.focus();
+  suppressSystemKeyboard();
 });
+
+function suppressSystemKeyboard() {
+  els.answer.setAttribute("readonly", "readonly");
+  els.answer.setAttribute("inputmode", "none");
+  if (document.activeElement === els.answer) els.answer.blur();
+}
+
+els.answer.addEventListener("pointerdown", (event) => {
+  event.preventDefault();
+});
+els.answer.addEventListener("focus", suppressSystemKeyboard);
 
 els.openMisses.addEventListener("click", () => {
   renderMisses();

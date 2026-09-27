@@ -327,18 +327,19 @@ h1 {
 #answer {
   width: 140px;
   height: 64px;
-  border: 3px solid #e7edf7;
+  border: 3px solid var(--accent-2);
   border-radius: 18px;
   text-align: center;
   font-family: Fredoka, sans-serif;
   font-size: 36px;
   font-weight: 700;
   background: var(--paper);
-}
-
-#answer:focus {
+  color: var(--ink);
+  caret-color: transparent;
+  opacity: 1;
   outline: none;
-  border-color: var(--accent-2);
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .submit {
